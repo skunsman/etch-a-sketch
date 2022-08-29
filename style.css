@@ -21,3 +21,7 @@ body {
     border: 1px solid aqua;
     text-align: center;
 }
+
+.fill {
+    background-color: rebeccapurple;
+}
