@@ -31,9 +31,23 @@ function changeGridSize(evt) {
     makeRows(gridSize, gridSize);
 }
 
+function randomColorNumber() {
+    min = 0, max = 255;
+    return Math.floor(Math.random() * (max - min) + min);
+}
 
 function changeColor(evt) {
-    evt.target.classList.add('fill');
+    // evt.target.classList.add('fill');
+    evt.target.style.backgroundColor = `rgb(${randomColorNumber()}, ${randomColorNumber()}, ${randomColorNumber()})`;
+}
+
+function changeShade(evt) {
+    let currentColor = (evt.target.style.backgroundColor || 'rgba(0, 0, 0, 0.1)');
+
+    let newColor = Number(currentColor.replace('(', '').replace(')', '').split(',')[3]);
+    newColor = newColor < 1 ? newColor + .1 : 1;
+    
+    evt.target.style.backgroundColor = `rgba(0, 0, 0, ${newColor})`;
 }
 
 
@@ -45,7 +59,9 @@ function makeRows(rows, cols) {
 
     for (let i = 0; i < (rows * cols); i++) {
         let cell = document.createElement('div');
-        cell.addEventListener('mouseover', changeColor);
+        // cell.addEventListener('mouseover', changeColor);
+        cell.addEventListener('mouseover', changeShade);
+
         container.appendChild(cell);
     };
 };
